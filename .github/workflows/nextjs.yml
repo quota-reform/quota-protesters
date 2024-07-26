@@ -40,32 +40,40 @@ jobs:
         with:
           node-version: 20
 
-      - name: Install npm
-        run: npm install -g npm@10
-
-      - name: Cache npm
-        uses: actions/cache@v3
+      - uses: pnpm/action-setup@v2
+        name: Install pnpm
+        id: pnpm-install
         with:
-          path: ~/.npm
-          key: ${{ runner.os }}-npm-cache-${{ hashFiles('**/package-lock.json') }}
+          version: 7
+          run_install: false
+
+      - name: Get pnpm store directory
+        id: pnpm-cache
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
+
+      - uses: actions/cache@v3
+        name: Setup pnpm cache
+        with:
+          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
           restore-keys: |
-            ${{ runner.os }}-npm-cache-
+            ${{ runner.os }}-pnpm-store-
 
       - name: Install dependencies
-        run: npm install
+        run: pnpm install --no-frozen-lockfile
 
       - name: Setup Pages
         uses: actions/configure-pages@v3
         with:
           static_site_generator: next
-
       - name: Build with Next.js
-        run: npm run build
-
+        run: pnpm next build
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
-          path: ./.next
+          path: ./out
 
   # Deployment job
   deploy:
