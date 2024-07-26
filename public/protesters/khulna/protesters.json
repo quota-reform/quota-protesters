@@ -1,0 +1,30 @@
+[
+  {
+    "name": "Hasanul Banna",
+    "district": "Khulna",
+    "address": "",
+    "gender": "Male/Female",
+    "type": "student/journalist/civilian",
+    "institute": "institute",
+    "class": "5/6/7/8/9/10/11/12/Honours/Masters",
+    "status": "Injured/Killed",
+    "date": "",
+    "dateOfBirth": "",
+    "dateOfDeath": "",
+    "brief": ""
+  },
+  {
+    "name": "Karim Janat",
+    "district": "Khulna",
+    "address": "",
+    "gender": "Male/Female",
+    "type": "student/journalist/civilian",
+    "institute": "institute",
+    "class": "5/6/7/8/9/10/11/12/Honours/Masters",
+    "status": "Injured/Killed",
+    "date": "",
+    "dateOfBirth": "",
+    "dateOfDeath": "",
+    "brief": ""
+  }
+]
